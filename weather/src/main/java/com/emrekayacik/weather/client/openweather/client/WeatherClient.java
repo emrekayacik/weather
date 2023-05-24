@@ -11,4 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface WeatherClient {
     @GetMapping("weather")
     WeatherResponse getWeather(@RequestParam("q") String city, @RequestParam("appid") String apiKey);
+    @GetMapping("weather")
+    WeatherResponse getWeatherByCoordinate(@RequestParam("lat") double lat, @RequestParam("lon") double lon ,@RequestParam("appid") String apiKey);
 }
