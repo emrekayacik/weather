@@ -23,6 +23,10 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ExceptionHandler
     public final ResponseEntity<Object> handleAllExceptions(Exception e, WebRequest webRequest) {
 
+        return getObjectResponseEntity(e, webRequest);
+    }
+
+    private ResponseEntity<Object> getObjectResponseEntity(Exception e, WebRequest webRequest) {
         String message = e.getMessage();
         String description = webRequest.getDescription(false);
         var genericErrorMessage = new GenericErrorMessage(LocalDateTime.now(), message, description);
@@ -34,13 +38,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ExceptionHandler
     public final ResponseEntity<Object> handleAllExceptions(TransactionSystemException e, WebRequest webRequest) {
 
-        String message = e.getMessage();
-        String description = webRequest.getDescription(false);
-
-        var genericErrorMessage = new GenericErrorMessage(LocalDateTime.now(), message, description);
-        var response = RestResponse.error(genericErrorMessage);
-
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return getObjectResponseEntity(e, webRequest);
     }
 
     @ExceptionHandler
