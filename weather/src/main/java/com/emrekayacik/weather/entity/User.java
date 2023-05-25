@@ -37,7 +37,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "PHONE_NUMBER",nullable = false,length = 50,unique = true)
     private String phoneNumber;
     @OneToMany(mappedBy="user")
-    private Set<UserWeatherSaved> savedWeather;
+    private Set<UserWeather> savedWeather;
 
     @Enumerated(EnumType.STRING)
     private Role role;

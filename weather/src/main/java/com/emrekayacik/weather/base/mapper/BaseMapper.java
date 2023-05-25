@@ -10,9 +10,9 @@ import java.util.List;
 @MappedSuperclass
 public interface BaseMapper<E extends BaseEntity, D extends BaseDto> {
 
-    E convertToEntity(D productDto);
+    E convertToEntity(D dto);
 
-    D convertToDto(E product);
+    D convertToDto(E entity);
 
     List<D> convertToDtoList(List<E> entityList);
     List<E> convertToEntityList(List<D> dtoList);

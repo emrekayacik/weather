@@ -1,4 +1,4 @@
-package com.emrekayacik.weather.controller;
+package com.emrekayacik.weather.controller.client.openweather;
 
 import com.emrekayacik.weather.client.openweather.client.WeatherClient;
 import com.emrekayacik.weather.client.openweather.response.WeatherResponse;
@@ -6,16 +6,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("weather")
 @SecurityRequirement(name = "bearerAuth")
-public class WeatherController {
+public class ClientController {
 
     private final WeatherClient weatherClient;
     @Value("${openweathermap.apiKey}")

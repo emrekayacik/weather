@@ -10,7 +10,6 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,5 +28,4 @@ public class UserDto extends BaseDto {
     private String email;
     @NotBlank @Length(min = 3,max = 30)
     private String phoneNumber;
-
 }

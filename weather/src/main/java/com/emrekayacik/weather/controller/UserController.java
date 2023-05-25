@@ -22,8 +22,6 @@ import java.util.List;
 @SecurityRequirement(name = "bearerAuth")
 public class UserController{
     private final UserServiceContract userServiceContract;
-
-
     @GetMapping("/")
     @Operation(summary = "Get All Users")
     public ResponseEntity<RestResponse<List<UserDto>>> get(){

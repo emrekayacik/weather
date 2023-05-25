@@ -1,0 +1,12 @@
+${AnsiColor.1}${AnsiBackground.233}                          _    _
+${AnsiBackground.235}                         ( )_ ( )
+${AnsiBackground.235} _   _   _    __     _ _ | ,_)| |__     __   _ __   _ _  _ _    _ _
+${AnsiBackground.235}( ) ( ) ( ) /'__`\ /'_` )| |  |  _ `\ /'__`\( '__)/'_` )( '_`\ ( '_`\
+${AnsiBackground.237}| \_/ \_/ |(  ___/( (_| || |_ | | | |(  ___/| |  ( (_| || (_) )| (_) )
+${AnsiBackground.239}`\___x___/'`\____)`\__,_)`\__)(_) (_)`\____)(_)  `\__,_)| ,__/'| ,__/'
+${AnsiBackground.241}                                                        | |    | |
+${AnsiBackground.243}                                                        (_)    (_)
+${AnsiColor.1}${AnsiBackground.233}
+${AnsiBackground.DEFAULT}${AnsiColor.DEFAULT}
+${application.title} ${application.version}
+Powered by Spring Boot ${spring-boot.version}

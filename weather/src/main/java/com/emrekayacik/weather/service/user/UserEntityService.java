@@ -12,10 +12,10 @@ public class UserEntityService extends BaseEntityService<User, UserRepository> {
         super(repository);
         this.userRepository = repository;
     }
-    User findFirstByUsername(String username){
+    public User findFirstByUsername(String username){
         return userRepository.findFirstByUsername(username);
     }
-    void updateEmailByUsername(String username, String email){
+    public void updateEmailByUsername(String username, String email){
         userRepository.updateEmailByUsername(username,email);
     }
 

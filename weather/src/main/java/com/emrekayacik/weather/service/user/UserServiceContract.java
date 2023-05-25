@@ -6,10 +6,8 @@ import com.emrekayacik.weather.entity.User;
 import com.emrekayacik.weather.mapper.UserMapper;
 import com.emrekayacik.weather.request.UserChangeEmailRequest;
 import com.emrekayacik.weather.request.UserDeleteRequest;
-import com.emrekayacik.weather.request.UserLoginRequest;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +17,6 @@ import java.util.List;
 public class UserServiceContract {
     private final UserEntityService userEntityService;
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
-    private final BCryptPasswordEncoder passwordEncoder;
-
 
     public List<UserDto> findAll(){
 
@@ -44,23 +40,6 @@ public class UserServiceContract {
         }
         return INSTANCE.convertToDto(user);
     }
-    public UserDto save(UserDto userDto){
-        User userFound = userEntityService.findFirstByUsername(userDto.getUsername());
-
-        if(userFound != null){
-            throw new ItemNotFoundException(() ->
-                    "Username is already taken by another user, please change your username."
-            );
-        }
-
-        String hashedPassword = passwordEncoder.encode(userDto.getPassword());
-
-        User userEntity = INSTANCE.convertToEntity(userDto);
-        userEntity.setPassword(hashedPassword);
-        User user = userEntityService.save(userEntity);
-
-        return INSTANCE.convertToDto(user);
-    }
     public void deleteUserByUsername(UserDeleteRequest userDeleteRequest){
         UserDto userByUsername = findByUsername(userDeleteRequest.username());
 
@@ -70,18 +49,11 @@ public class UserServiceContract {
     }
     public void changeEmail(UserChangeEmailRequest request){
         findByUsername(request.username());
-
         userEntityService.updateEmailByUsername(request.username(), request.email());
-
-
     }
 
-    //TODO: JWT
-    public boolean login(UserLoginRequest request){
-
-        String storedHashedPassword = userEntityService.findFirstByUsername(request.username()).getPassword();
-
-        return passwordEncoder.matches(request.password(), storedHashedPassword);
+    public UserDto save(UserDto userDto){
+        User savedUser = userEntityService.save(INSTANCE.convertToEntity(userDto));
+        return INSTANCE.convertToDto(savedUser);
     }
-
 }
