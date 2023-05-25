@@ -11,11 +11,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Qualifier("openWeatherMapClient")
 public interface WeatherClient {
     @GetMapping("weather")
-    WeatherResponse getCurrentWeatherByCityName(@RequestParam("q") String city, @RequestParam("appid") String apiKey);
+    WeatherResponse getCurrentWeatherByCityName(@RequestParam("q") String city,
+                                                @RequestParam("units") String units,
+                                                @RequestParam("appid") String apiKey);
     @GetMapping("weather")
-    WeatherResponse getCurrentWeatherByCoordinates(@RequestParam("lat") double lat, @RequestParam("lon") double lon , @RequestParam("appid") String apiKey);
+    WeatherResponse getCurrentWeatherByCoordinates(@RequestParam("lat") double lat,
+                                                   @RequestParam("lon") double lon ,
+                                                   @RequestParam("units") String units,
+                                                   @RequestParam("appid") String apiKey);
     @GetMapping("forecast")
-    ForecastResponse getWeatherFiveDaysForecastsByCityName(@RequestParam("q") String city, @RequestParam("appid") String apiKey);
+    ForecastResponse getWeatherFiveDaysForecastsByCityName(@RequestParam("q") String city,
+                                                           @RequestParam("units") String units,
+                                                           @RequestParam("appid") String apiKey);
     @GetMapping("forecast")
-    ForecastResponse getWeatherFiveDaysForecastsByCoordinates(@RequestParam("lat") double lat, @RequestParam("lon") double lon , @RequestParam("appid") String apiKey);
+    ForecastResponse getWeatherFiveDaysForecastsByCoordinates(@RequestParam("lat") double lat,
+                                                              @RequestParam("lon") double lon ,
+                                                              @RequestParam("units") String units,
+                                                              @RequestParam("appid") String apiKey);
 }

@@ -20,11 +20,13 @@ public class ClientController {
     private final WeatherClient weatherClient;
     @Value("${openweathermap.apiKey}")
     String apiKey;
+    @Value("${openweathermap.unit}")
+    String unit;
     @GetMapping("/current/city")
     @Operation(summary = "Get Current Weather Info By City Name")
     public String getCurrentWeatherByCityName(@RequestParam("city") String city) {
 
-        WeatherResponse response = weatherClient.getCurrentWeatherByCityName(city, apiKey );
+        WeatherResponse response = weatherClient.getCurrentWeatherByCityName(city,unit, apiKey );
         double temperature = response.getMain().getTemp();
         return "Temperature in " + city + ": " + temperature + "°C";
     }
@@ -32,7 +34,7 @@ public class ClientController {
     @Operation(summary = "Get Current Weather Info By Coordinate")
     public String getCurrentWeatherByCoordinates(@RequestParam("lat") double lat,@RequestParam("lon") double lon) {
 
-        WeatherResponse response = weatherClient.getCurrentWeatherByCoordinates(lat,lon, apiKey );
+        WeatherResponse response = weatherClient.getCurrentWeatherByCoordinates(lat,lon,unit,  apiKey );
         double temperature = response.getMain().getTemp();
         return "Temperature in " + lat + "-" + lon + " "+ temperature + "°C";
     }
@@ -41,7 +43,7 @@ public class ClientController {
     @Operation(summary = "Get Weather Forecasts By City Name (5 Days 3-hours each")
     public String getWeatherFiveDaysForecastsByCityName(@RequestParam("city") String city) {
 
-        ForecastResponse response = weatherClient.getWeatherFiveDaysForecastsByCityName(city, apiKey );
+        ForecastResponse response = weatherClient.getWeatherFiveDaysForecastsByCityName(city,unit,  apiKey );
         Date sunrise = new Date(response.getCity().getSunrise());
         String country = response.getCity().getCountry();
         return "country: " + country;
@@ -50,7 +52,7 @@ public class ClientController {
     @Operation(summary = "Get Weather Forecasts By Coordinate (5 Days 3-hours each)")
     public String getWeatherFiveDaysForecastsByCoordinates(@RequestParam("lat") double lat,@RequestParam("lon") double lon) {
 
-        ForecastResponse response = weatherClient.getWeatherFiveDaysForecastsByCoordinates(lat,lon, apiKey );
+        ForecastResponse response = weatherClient.getWeatherFiveDaysForecastsByCoordinates(lat,lon,unit,  apiKey );
         String country = response.getCity().getCountry();
         return "country: " + country;
     }
