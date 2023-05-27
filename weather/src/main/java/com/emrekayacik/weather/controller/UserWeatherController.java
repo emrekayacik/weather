@@ -24,7 +24,7 @@ public class UserWeatherController {
     private final UserWeatherServiceContract service;
 
     @PostMapping("/")
-    @Operation(summary = "User saves a city by name")
+    @Operation(summary = "User saves a city by its name")
     public ResponseEntity<RestResponse<UserSaveCityByNameResponse>> saveCityByName(@RequestBody UserSaveCityByNameRequest request) {
         return ResponseEntity.ok(RestResponse.of(service.save(request)));
     }

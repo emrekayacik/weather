@@ -1,17 +1,18 @@
-package com.emrekayacik.weather.client.openweather.response;
+package com.emrekayacik.weather.client.openweather.response.forecast;
 
 import com.emrekayacik.weather.client.openweather.domain.ForecastCity;
-import com.emrekayacik.weather.client.openweather.domain.WeatherMain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
 
-import java.util.ArrayList;
-
+/**
+ * Represents the top response from the OpenWeatherMap API for weather forecasts.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
 public class ForecastResponse {
     private ForecastCity city;
-    private ArrayList<WeatherResponse> list;
+    private List<ForecastWeatherResponse> list;
 }

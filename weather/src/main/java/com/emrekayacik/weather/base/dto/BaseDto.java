@@ -4,6 +4,10 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 
+/**
+ * An abstract base DTO class that provides common fields and functionality for other DTO classes.
+ * This class is intended to be extended by other DTO classes to inherit the common fields and methods.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
+/**
+ * Represents the city information in the weather forecast response by OpenWeatherApi.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
 public class ForecastCity {
     private String name;
     private String country;
-    private Long sunrise;
-    private Long sunset;
+    private Coordinate coord;
 }

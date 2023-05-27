@@ -7,6 +7,10 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ * An embeddable entity class representing base audit information for entities.
+ * It includes fields for tracking the creation and modification dates and the IDs of the users responsible for the changes.
+ */
 @Embeddable
 @Getter
 @Setter

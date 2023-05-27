@@ -12,6 +12,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Entity class that represents a user in the application.
+ */
+
 @Entity
 @Table(name = "USER_DEF")
 @Getter
@@ -36,7 +40,7 @@ public class User extends BaseEntity implements UserDetails {
     private String email;
     @Column(name = "PHONE_NUMBER",nullable = false,length = 50,unique = true)
     private String phoneNumber;
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy="user",fetch = FetchType.LAZY)
     private Set<UserWeather> savedWeather;
 
     @Enumerated(EnumType.STRING)

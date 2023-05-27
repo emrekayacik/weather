@@ -8,6 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * An exception class representing a custom business exception.
+ * It extends the RuntimeException class and is used to handle business-related errors.
+ */
 @Data
 @EqualsAndHashCode(callSuper=false)
 @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

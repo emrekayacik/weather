@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Entity class that represents which user saved which city in the application.
+ */
+
 @Entity
 @Table(name = "WEATHER_SAVED",uniqueConstraints = { @UniqueConstraint(name = "UQ_USER_CITY_NAME", columnNames = { "CITY_NAME", "USER_ID" }) })
 @Getter
@@ -18,7 +22,7 @@ public class UserWeather extends BaseEntity {
     @Column(name = "CITY_NAME",length = 100 , nullable = false)
     private String cityName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="USER_ID", nullable=false)
     private User user;
 }

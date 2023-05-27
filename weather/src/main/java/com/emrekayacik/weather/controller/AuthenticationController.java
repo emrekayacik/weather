@@ -12,17 +12,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller class for handling authentication-related endpoints.
+ */
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authService;
+
+    /**
+     * Endpoint for user registration.
+     *
+     * @param request The registration request containing user details.
+     * @return ResponseEntity containing the registration response.
+     */
     @PostMapping("/register")
-    public ResponseEntity<RestResponse<AuthenticationResponse>> register(@RequestBody RegisterRequest request){
+    public ResponseEntity<RestResponse<AuthenticationResponse>> register(@RequestBody RegisterRequest request) {
         return ResponseEntity.ok(RestResponse.of(authService.register(request)));
     }
+
+    /**
+     * Endpoint for user authentication.
+     *
+     * @param request The authentication request containing user credentials.
+     * @return ResponseEntity containing the authentication response.
+     */
     @PostMapping("/authenticate")
-    public ResponseEntity<RestResponse<AuthenticationResponse>> authenticate(@RequestBody AuthenticationRequest request){
+    public ResponseEntity<RestResponse<AuthenticationResponse>> authenticate(@RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(RestResponse.of(authService.authenticate(request)));
     }
 }
