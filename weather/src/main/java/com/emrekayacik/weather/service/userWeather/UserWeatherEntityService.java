@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserWeatherEntityService extends BaseEntityService<UserWeather, UserWeatherRepository> {
-
     /**
      * Constructs a new UserWeatherEntityService with the provided repository.
      *
@@ -19,4 +18,6 @@ public class UserWeatherEntityService extends BaseEntityService<UserWeather, Use
     public UserWeatherEntityService(UserWeatherRepository repository) {
         super(repository);
     }
+
+
 }

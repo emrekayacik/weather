@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,14 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest(classes = {WeatherApplication.class})
-public class ClientControllerTest extends BaseTest {
-    private static final String BASE_PATH = "/weather";
+public class UserControllerTest extends BaseTest {
+    private static final String BASE_PATH = "/users";
 
     @Autowired
     private WebApplicationContext context;
 
     private MockMvc mockMvc;
-
 
     @BeforeEach
     void setUp() {
@@ -36,12 +36,10 @@ public class ClientControllerTest extends BaseTest {
         objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
     }
 
-
     @Test
-    void should_get_city_forecasts_by_cityName_and_return_success() throws Exception {
-        String city = "istanbul";
+    void should_get_all_and_return_success() throws Exception {
         MvcResult mvcResult = mockMvc.perform(
-                        MockMvcRequestBuilders.get(BASE_PATH + "/forecasts/city?city="+ city )
+                        MockMvcRequestBuilders.get(BASE_PATH + "/")
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
@@ -52,11 +50,10 @@ public class ClientControllerTest extends BaseTest {
     }
 
     @Test
-    void should_get_city_forecasts_by_lat_lon_and_return_success() throws Exception {
-        double lat = 34.5;
-        double lon = 26.5;
+    void should_get_by_id_and_return_success() throws Exception {
+        long id = 1003L;
         MvcResult mvcResult = mockMvc.perform(
-                        MockMvcRequestBuilders.get(BASE_PATH + "/forecasts/coordinates?lat="+ lat + "&lon=" +lon )
+                        MockMvcRequestBuilders.get(BASE_PATH + "/" + id )
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
@@ -67,10 +64,15 @@ public class ClientControllerTest extends BaseTest {
     }
 
     @Test
-    void should_get_city_current_weather_by_cityName_and_return_success() throws Exception {
-        String city = "istanbul";
+    void should_delete_and_return_success() throws Exception {
+        String body = """
+                {
+                  "username": "alpaygds"
+                }""";
         MvcResult mvcResult = mockMvc.perform(
-                        MockMvcRequestBuilders.get(BASE_PATH + "/current/city?city="+ city )
+                        MockMvcRequestBuilders.delete(BASE_PATH + "/")
+                                .content(body)
+                                .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
@@ -81,11 +83,40 @@ public class ClientControllerTest extends BaseTest {
     }
 
     @Test
-    void should_get_city_current_weather_by_lat_lon_and_return_success() throws Exception {
-        double lat = 34.5;
-        double lon = 26.5;
+    void should_update_user_and_return_success() throws Exception {
+        long id = 1001L;
+        String body = """
+                {
+                  "username": "emrekayacik",
+                  "password": "testpassword",
+                  "name": "emre",
+                  "surname": "kayacik",
+                  "email": "emrekayacik2634@gmail.com",
+                  "phoneNumber": "+905533095569"
+                }""";
         MvcResult mvcResult = mockMvc.perform(
-                        MockMvcRequestBuilders.get(BASE_PATH + "/current/coordinates?lat="+ lat + "&lon=" +lon )
+                        MockMvcRequestBuilders.put(BASE_PATH + "/" + id + "/update")
+                                .content(body)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        boolean success = isSuccess(mvcResult);
+
+        assertTrue(success);
+    }
+    @Test
+    void should_update_email_by_username_and_return_success() throws Exception {
+        String body = """
+                {
+                  "username": "emrekayacik",
+                  "email": "dummydummy@gmail.com"
+                }""";
+        MvcResult mvcResult = mockMvc.perform(
+                        MockMvcRequestBuilders.patch(BASE_PATH + "/")
+                                .content(body)
+                                .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();

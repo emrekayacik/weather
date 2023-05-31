@@ -14,7 +14,11 @@ public class BaseTest {
     protected boolean isSuccess(MvcResult mvcResult) throws JsonProcessingException, UnsupportedEncodingException {
         var restResponse = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), RestResponse.class);
 
-        boolean success = restResponse.isSuccess();
-        return success;
+        return restResponse.isSuccess();
+    }
+    protected Object getResponseData(MvcResult mvcResult) throws JsonProcessingException, UnsupportedEncodingException {
+        var restResponse = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), RestResponse.class);
+
+        return restResponse.getData();
     }
 }

@@ -45,9 +45,11 @@ public abstract class BaseEntityService<E extends BaseEntity, R extends JpaRepos
 
     private void checkAuthentication(E entity) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            User userDetails = (User) authentication.getPrincipal();
-            setBaseAuditableEntity(entity, userDetails);
+        if (authentication != null){
+            if (!(authentication instanceof AnonymousAuthenticationToken)) {
+                User userDetails = (User) authentication.getPrincipal();
+                setBaseAuditableEntity(entity, userDetails);
+            }
         }
     }
 

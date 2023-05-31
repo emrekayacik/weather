@@ -11,8 +11,10 @@ import com.emrekayacik.weather.service.user.UserEntityService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 /**
  * Service Contract class for managing UserWeather operations based on city names.
@@ -28,6 +30,33 @@ public class UserWeatherServiceContract {
     UserMapper INSTANCE_USER_MAPPER = Mappers.getMapper(UserMapper.class);
 
 
+    public List<UserWeatherDto> findAll(){
+        List<UserWeather> userWeatherList = userWeatherEntityService.findAll();
+
+        return INSTANCE.convertToDtoList(userWeatherList);
+    }
+    public UserWeatherDto findById(Long id){
+        UserWeather userWeather = userWeatherEntityService.findById(id);
+        return INSTANCE.convertToDto(userWeather);
+    }
+
+    public List<UserWeatherDto> findByUsername(String username){
+
+        return findAll().stream()
+                .filter(a->a.getUser().getUsername().equals(username))
+                .toList();
+    }
+    public List<UserWeatherDto> findByCityName(String cityName){
+        return findAll().stream()
+                .filter(a->a.getCityName().equals(cityName))
+                .toList();
+    }
+
+    public List<UserWeatherDto> findCurrentUserCities(){
+        var currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
+        return findByUsername(currentUserName);
+    }
+
     @Transactional
     public UserSaveCityByNameResponse save(UserSaveCityByNameRequest request){
         UserDto userDto = INSTANCE_USER_MAPPER.convertToDto(userEntityService.findFirstByUsername(request.username()));
@@ -39,4 +68,7 @@ public class UserWeatherServiceContract {
         return INSTANCE.convertEntityToResponse(userWeather);
     }
 
+    public void delete(Long id) {
+        userWeatherEntityService.delete(INSTANCE.convertToEntity(findById(id)));
+    }
 }

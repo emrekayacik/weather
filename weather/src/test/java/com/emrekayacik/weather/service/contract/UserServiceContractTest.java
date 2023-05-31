@@ -1,10 +1,8 @@
 package com.emrekayacik.weather.service.contract;
 
-import com.emrekayacik.weather.base.exception.custom.BusinessException;
 import com.emrekayacik.weather.dto.UserDto;
 import com.emrekayacik.weather.entity.User;
 import com.emrekayacik.weather.request.UserDeleteRequest;
-import com.emrekayacik.weather.security.service.AuthenticationService;
 import com.emrekayacik.weather.service.user.UserEntityService;
 import com.emrekayacik.weather.service.user.UserServiceContract;
 import org.junit.jupiter.api.Assertions;
@@ -72,7 +70,6 @@ public class UserServiceContractTest {
     void should_throw_exception_when_invalid_request_found() {
         UserDeleteRequest request = mock(UserDeleteRequest.class);
         Assertions.assertThrows(RuntimeException.class, () -> userServiceContract.deleteUserByUsername(request));
-
     }
 
 
