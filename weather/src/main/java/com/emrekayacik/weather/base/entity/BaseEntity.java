@@ -18,5 +18,5 @@ import java.io.Serializable;
 @Table
 public abstract class BaseEntity implements Serializable, Cloneable, BaseEntityModel {
     @Embedded
-    private BaseAuditableEntity baseAuditableEntity;
+    private BaseAuditableEntity auditable;
 }

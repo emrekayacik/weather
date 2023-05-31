@@ -16,7 +16,7 @@ import lombok.*;
 @MappedSuperclass
 public abstract class BaseDto implements BaseDtoModel {
     @Embedded
-    private BaseAuditableDto auditableDto;
+    private BaseAuditableDto auditable;
 
     protected Long id;
     @Override

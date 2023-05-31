@@ -11,8 +11,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,4 +31,5 @@ public class UserDto extends BaseDto {
     private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private Role role;
+
 }

@@ -15,4 +15,6 @@ import java.util.List;
 public class ForecastResponse {
     private ForecastCity city;
     private List<ForecastWeatherResponse> list;
+    private String cod;
+    private String message;
 }

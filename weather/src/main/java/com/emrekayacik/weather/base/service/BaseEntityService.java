@@ -101,7 +101,7 @@ public abstract class BaseEntityService<E extends BaseEntity, R extends JpaRepos
     }
 
     private void setBaseAuditableEntity(E entity, User userDetails) {
-        BaseAuditableEntity baseAuditableEntity = entity.getBaseAuditableEntity();
+        BaseAuditableEntity baseAuditableEntity = entity.getAuditable();
         if (baseAuditableEntity == null){
             baseAuditableEntity = new BaseAuditableEntity();
         }
@@ -115,7 +115,7 @@ public abstract class BaseEntityService<E extends BaseEntity, R extends JpaRepos
             baseAuditableEntity.setModifiedUser(userDetails.getId());
         }
 
-        entity.setBaseAuditableEntity(baseAuditableEntity);
+        entity.setAuditable(baseAuditableEntity);
     }
 
 }

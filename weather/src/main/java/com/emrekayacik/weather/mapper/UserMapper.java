@@ -6,12 +6,11 @@ import com.emrekayacik.weather.dto.UserDto;
 import com.emrekayacik.weather.entity.User;
 import com.emrekayacik.weather.request.UserUpdateRequest;
 import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
 
 /**
  * Mapper interface for mapping User entities and DTOs.
  */
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {AuditableMapper.class})
+@Mapper(uses = {AuditableMapper.class})
 public interface UserMapper extends BaseMapper<User, UserDto> {
 
     /**

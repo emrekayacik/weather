@@ -47,7 +47,7 @@ public class AuthenticationService {
         // Create a new BaseAuditableEntity with the current timestamp and set it on the user
         BaseAuditableEntity baseAuditableEntity = new BaseAuditableEntity();
         baseAuditableEntity.setCreatedDate(LocalDateTime.now());
-        user.setBaseAuditableEntity(baseAuditableEntity);
+        user.setAuditable(baseAuditableEntity);
 
         // Save the user entity in the repository
         repository.save(user);

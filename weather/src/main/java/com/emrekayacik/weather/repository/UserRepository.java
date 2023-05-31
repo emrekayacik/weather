@@ -32,7 +32,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      */
     @Modifying
     @Transactional
-    @Query("update User user set user.email = ?2, user.baseAuditableEntity.modifiedDate = ?3 where user.username = ?1")
+    @Query("update User user set user.email = ?2, user.auditable.modifiedDate = ?3 where user.username = ?1")
     void updateEmailByUsername(String username, String email, LocalDateTime date);
 
     /**

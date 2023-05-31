@@ -2,6 +2,7 @@ package com.emrekayacik.weather.base.exception;
 
 import com.emrekayacik.weather.base.exception.custom.BusinessException;
 import com.emrekayacik.weather.base.response.RestResponse;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -81,6 +82,23 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     public final ResponseEntity<Object> handleAllExceptions(BusinessException e, WebRequest webRequest) {
         String message = e.getBaseErrorMessage().getMessage();
         String description = webRequest.getDescription(false);
+        var genericErrorMessage = new GenericErrorMessage(LocalDateTime.now(), message, description);
+        var response = RestResponse.error(genericErrorMessage);
+        logger.error("message: " + message + " detail: " + description);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * Handles FeignException.
+     *
+     * @param e          the exception
+     * @param webRequest the web request
+     * @return a ResponseEntity with an error message
+     */
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAllExceptions(FeignException e, WebRequest webRequest) {
+        String message = "Requested city or coordinates cannot found.";
+        String description = e.getMessage() + " " +webRequest.getDescription(false);
         var genericErrorMessage = new GenericErrorMessage(LocalDateTime.now(), message, description);
         var response = RestResponse.error(genericErrorMessage);
         logger.error("message: " + message + " detail: " + description);
