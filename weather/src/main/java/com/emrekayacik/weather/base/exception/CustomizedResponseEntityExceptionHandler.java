@@ -97,7 +97,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
      */
     @ExceptionHandler
     public final ResponseEntity<Object> handleAllExceptions(FeignException e, WebRequest webRequest) {
-        String message = "Requested city or coordinates cannot found.";
+        String message = "Requested city cannot found.";
         String description = e.getMessage() + " " +webRequest.getDescription(false);
         var genericErrorMessage = new GenericErrorMessage(LocalDateTime.now(), message, description);
         var response = RestResponse.error(genericErrorMessage);

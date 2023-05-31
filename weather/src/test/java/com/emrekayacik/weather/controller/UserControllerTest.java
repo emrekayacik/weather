@@ -67,8 +67,9 @@ public class UserControllerTest extends BaseTest {
     void should_delete_and_return_success() throws Exception {
         String body = """
                 {
-                  "username": "alpaygds"
-                }""";
+                  "username": "dummyusername"
+                }
+                """;
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.delete(BASE_PATH + "/")
                                 .content(body)

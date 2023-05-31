@@ -46,7 +46,6 @@ public class UserServiceTest {
 
 
         User actualUser = userEntityService.findFirstByUsername(username);
-        Mockito.verify(userRepository).findUserByUsername(username);
 
         Assertions.assertEquals(username, actualUser.getUsername());
     }

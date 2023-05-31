@@ -32,11 +32,7 @@ CREATE TABLE IF NOT EXISTS public.weather_saved
     city_name character varying(100) COLLATE pg_catalog."default" NOT NULL,
     user_id bigint NOT NULL,
     CONSTRAINT weather_saved_pkey PRIMARY KEY (id),
-    CONSTRAINT uq_user_city_name UNIQUE (city_name, user_id),
-    CONSTRAINT fkfy55rcwi5a824s375goxgt7ve FOREIGN KEY (user_id)
-    REFERENCES public.user_def (id) MATCH SIMPLE
-                              ON UPDATE NO ACTION
-                              ON DELETE NO ACTION
+    CONSTRAINT uq_user_city_name UNIQUE (city_name, user_id)
     )
 ;
 

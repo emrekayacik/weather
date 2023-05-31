@@ -10,6 +10,10 @@ INSERT INTO public.user_def(
     id, created_date, id_created_user, modified_date, id_modified_user, email, name, password, phone_number, role, surname, username)
 VALUES (1003, null, null, null, null, 'meteknl@gmail.com', 'mete', '1597530abc', '+905514752195', 'USER', 'kanli', 'meteknl');
 
+INSERT INTO public.user_def(
+    id, created_date, id_created_user, modified_date, id_modified_user, email, name, password, phone_number, role, surname, username)
+VALUES (9999, null, null, null, null, 'dummy@gmail.com', 'dummy', 'dummydummy', '+905145232195', 'USER', 'dummy', 'dummyusername');
+
 
 INSERT INTO public.weather_saved(
     id, created_date, id_created_user, modified_date, id_modified_user, city_name, user_id)
