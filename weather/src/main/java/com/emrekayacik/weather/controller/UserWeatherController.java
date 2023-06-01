@@ -19,6 +19,7 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearerAuth")
+@CrossOrigin(origins="*")
 public class UserWeatherController {
 
     private final UserWeatherServiceContract service;

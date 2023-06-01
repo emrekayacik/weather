@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("weather")
 @SecurityRequirement(name = "bearerAuth")
+@CrossOrigin(origins="*")
 public class ClientController {
 
     private final ClientService clientService;

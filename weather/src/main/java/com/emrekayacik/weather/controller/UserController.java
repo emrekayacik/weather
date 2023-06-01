@@ -24,6 +24,7 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearerAuth")
+@CrossOrigin(origins="*")
 public class UserController {
     private final UserServiceContract userServiceContract;
 
