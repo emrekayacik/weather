@@ -37,10 +37,11 @@ public class UserWeatherServiceContractTest {
         // Mock input
         String username = "testUser";
         String city = "testCity";
+        Long id = 5L;
 
         // Create request-response
         UserSaveCityByNameRequest request = new UserSaveCityByNameRequest(username, city);
-        UserSaveCityByNameResponse expectedResponse = new UserSaveCityByNameResponse(city,username);
+        UserSaveCityByNameResponse expectedResponse = new UserSaveCityByNameResponse(city,username,id);
 
         // Initialize user entity
         User userEntity = new User();
@@ -51,6 +52,7 @@ public class UserWeatherServiceContractTest {
         UserWeather userWeather = new UserWeather();
         userWeather.setCityName(city);
         userWeather.setUser(userEntity);
+        userWeather.setId(id);
 
         // Mock the behavior of userWeatherEntityService
         when(userWeatherEntityService.save(Mockito.any(UserWeather.class))).thenReturn(userWeather);

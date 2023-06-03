@@ -39,7 +39,7 @@ public class UserControllerTest extends BaseTest {
     @Test
     void should_get_all_and_return_success() throws Exception {
         MvcResult mvcResult = mockMvc.perform(
-                        MockMvcRequestBuilders.get(BASE_PATH + "/")
+                        MockMvcRequestBuilders.get(BASE_PATH)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
@@ -71,7 +71,7 @@ public class UserControllerTest extends BaseTest {
                 }
                 """;
         MvcResult mvcResult = mockMvc.perform(
-                        MockMvcRequestBuilders.delete(BASE_PATH + "/")
+                        MockMvcRequestBuilders.delete(BASE_PATH )
                                 .content(body)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -115,7 +115,7 @@ public class UserControllerTest extends BaseTest {
                   "email": "dummydummy@gmail.com"
                 }""";
         MvcResult mvcResult = mockMvc.perform(
-                        MockMvcRequestBuilders.patch(BASE_PATH + "/")
+                        MockMvcRequestBuilders.patch(BASE_PATH )
                                 .content(body)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )

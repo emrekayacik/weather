@@ -39,7 +39,7 @@ public class UserWeatherControllerTest extends BaseTest {
     @Test
     void should_get_all_and_return_success() throws Exception {
         MvcResult mvcResult = mockMvc.perform(
-                        MockMvcRequestBuilders.get(BASE_PATH + "/")
+                        MockMvcRequestBuilders.get(BASE_PATH )
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
@@ -109,7 +109,7 @@ public class UserWeatherControllerTest extends BaseTest {
                   "city": "beijing"
                 }""";
         MvcResult mvcResult = mockMvc.perform(
-                        MockMvcRequestBuilders.post(BASE_PATH + "/")
+                        MockMvcRequestBuilders.post(BASE_PATH)
                                 .content(body)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )

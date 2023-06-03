@@ -56,7 +56,7 @@ public class UserWeatherController {
     public ResponseEntity<RestResponse<UserSaveCityByNameResponse>> saveCityByName(@Valid @RequestBody UserSaveCityByNameRequest request) {
         return ResponseEntity.ok(RestResponse.of(service.save(request)));
     }
-    @GetMapping("/user/own")
+    @GetMapping("/users/own")
     @Operation(summary = "User current user's saved cities")
     public ResponseEntity<RestResponse<List<UserWeatherDto>>> getCurrentUserCities() {
         return ResponseEntity.ok(RestResponse.of(service.findCurrentUserCities()));
