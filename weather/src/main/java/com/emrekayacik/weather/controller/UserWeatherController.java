@@ -7,6 +7,7 @@ import com.emrekayacik.weather.response.UserSaveCityByNameResponse;
 import com.emrekayacik.weather.service.userWeather.UserWeatherServiceContract;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,17 +15,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/user-weather")
-@Validated
-@RequiredArgsConstructor
-@SecurityRequirement(name = "bearerAuth")
 @CrossOrigin(origins="*")
+@RestController
+@RequestMapping("/userWeathers")
+@RequiredArgsConstructor
+@Validated
+@SecurityRequirement(name = "bearerAuth")
 public class UserWeatherController {
 
     private final UserWeatherServiceContract service;
 
-    @GetMapping("/")
+    @GetMapping
     @Operation(summary = "Get all UserWeather records")
     public ResponseEntity<RestResponse<List<UserWeatherDto>>> get() {
         return ResponseEntity.ok(RestResponse.of(service.findAll()));
@@ -50,9 +51,9 @@ public class UserWeatherController {
         service.delete(id);
         return ResponseEntity.ok(RestResponse.empty());
     }
-    @PostMapping("/")
+    @PostMapping
     @Operation(summary = "User saves a city by its name")
-    public ResponseEntity<RestResponse<UserSaveCityByNameResponse>> saveCityByName(@RequestBody UserSaveCityByNameRequest request) {
+    public ResponseEntity<RestResponse<UserSaveCityByNameResponse>> saveCityByName(@Valid @RequestBody UserSaveCityByNameRequest request) {
         return ResponseEntity.ok(RestResponse.of(service.save(request)));
     }
     @GetMapping("/user/own")

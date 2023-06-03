@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import jwt from 'jwt-decode'
+import { setAuthToken } from "./common/setAuthToken";
 
 export default function App() {
   let userDetails;
@@ -22,6 +23,7 @@ export default function App() {
       userDetails = jwt(token);
       if(userDetails.exp*1000 > Date.now()){
         final = true;
+        setAuthToken(token);
       }
       else{
         logout();

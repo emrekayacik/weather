@@ -10,6 +10,7 @@ import ImgMediaCard from '../components/ImgMediaCard'
 import {CContainer,CRow} from '@coreui/bootstrap-react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import NavbarComp from '../components/NavbarComp';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
 
 const Title = styled.h1`
@@ -39,16 +40,27 @@ const Button = styled.button`
     margin-bottom: 10px;
     display: none;
 `
+
 const center = {
-  
   textAlign: "center",
   marginBottom: 20
 }
+
+
 const Home = (props) => {
   const [type, setType] = useState('');
   const [data, setData] = useState({});
   const [city, setCity] = useState('');
   const [country, setCountry] = useState('');
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+  };
 
   const handleSelectChange = (e) => {
     e.preventDefault();
@@ -79,7 +91,7 @@ const Home = (props) => {
     let city = document.getElementById("cityName").value;
 
     let typeToPost = type;
-    let BASE_URL = 'http://localhost:8080/api/v1/weather';
+    let BASE_URL = 'http://localhost:8080/api/v1/weathers';
     if(typeToPost === 1){
       doGet(`${BASE_URL}/forecasts/city?city=${city}`);
     }
@@ -89,17 +101,8 @@ const Home = (props) => {
   }
 
   const doGet = (url) =>{
-    // if(localStorage.getItem("jwtToken") === null){
-    //   axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("Authorization");
-    // }
     document.getElementById("errMessage").innerHTML = "";
-    let token = localStorage.getItem("Authorization");
     axios.get(url
-      ,{
-      headers: {
-        Authorization: 'Bearer ' + token 
-      }
-     }
      )
       .then( res =>
         {
@@ -112,13 +115,88 @@ const Home = (props) => {
         setData(data);
         setCity(data.city.name);
         setCountry(data.city.country);
+        document.getElementById("favButton").style.display = "inline-block";
+        //TODO: get users liked cities. if user liked the current city then favButtonOk should appear, if not favButton should appear 
       })
       .catch(error =>{
         console.log(error);
-        document.getElementById("errMessage").innerHTML = "Please provide a valid city name or latitute/longtitude.";
+        document.getElementById("errMessage").innerHTML = error.response?.data?.data?.message;
+        document.getElementById("favButton").style.display = "none";
     });
   }
+  
+  const handleFavorite = (e) =>{
+    e.preventDefault();
 
+    document.getElementById("errMessage").innerHTML = "";
+    let url = 'http://localhost:8080/api/v1/userWeathers';
+
+    let cityToPost = city;
+    let usernameToPost = props.username;
+
+    let obj = {
+      city: cityToPost,
+      username: usernameToPost
+    }
+
+    axios.post(url,obj)
+      .then( res =>
+        {
+            console.log(res);
+            return res.data.success ? res.data.data : res.data.messages
+        }
+      )
+      .then(data=> {
+        document.getElementById("favButton").style.display = "none";
+        document.getElementById("favButtonOk").style.display = "inline-block";
+      })
+      .catch(error =>{
+        if(error.response?.data?.data?.message.includes("already exists")){
+          document.getElementById("errMessage").innerHTML = "This user is already favorited this city.";
+        }
+        else{
+          document.getElementById("errMessage").innerHTML = error.response?.data?.data?.message;
+        }
+        
+    });
+  }
+  
+  const handleUnFavorite = (e) =>{
+    //TODO: delete record if user unfavorited
+    e.preventDefault();
+
+    document.getElementById("errMessage").innerHTML = "";
+    let url = 'http://localhost:8080/api/v1/userWeathers';
+
+    let cityToPost = city;
+    let usernameToPost = props.username;
+
+    let obj = {
+      city: cityToPost,
+      username: usernameToPost
+    }
+
+    axios.delete(url,obj)
+      .then( res =>
+        {
+            console.log(res);
+            return res.data.success ? res.data.data : res.data.messages
+        }
+      )
+      .then(data=> {
+        document.getElementById("favButton").style.display = "none";
+        document.getElementById("favButtonOk").style.display = "inline-block";
+      })
+      .catch(error =>{
+        if(error.response?.data?.data?.message.includes("already exists")){
+          document.getElementById("errMessage").innerHTML = "This user is already favorited this city.";
+        }
+        else{
+          document.getElementById("errMessage").innerHTML = error.response?.data?.data?.message;
+        }
+        
+    });
+  }
 
   return (
     <>
@@ -162,7 +240,27 @@ const Home = (props) => {
                   <ErrorMessage />
               </Form>
               <div style={center}>
-                <h1 style={{fontFamily: "Times New Roman"}}>{city}</h1><span>{country}</span>
+                <h1 style={{fontFamily: "Times New Roman"}}>{city}</h1><span>{country} </span>
+                <p><FavoriteBorderOutlinedIcon
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onClick={handleFavorite}
+                style={{
+                  color: isHovering ? 'red' : 'black',
+                  cursor: "pointer",
+                  display: "none"
+                }}
+                id="favButton"></FavoriteBorderOutlinedIcon></p>
+                <p><FavoriteBorderOutlinedIcon
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onClick={handleUnFavorite}
+                style={{
+                  color: isHovering ? '#8B0000' : 'red',
+                  cursor: "pointer",
+                  display: "none"
+                }}
+                id="favButtonOk"></FavoriteBorderOutlinedIcon></p>
               </div>
             <CRow>
             {data.list?.map((item) =>

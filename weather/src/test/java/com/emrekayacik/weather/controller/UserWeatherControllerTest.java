@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest(classes = {WeatherApplication.class})
 public class UserWeatherControllerTest extends BaseTest {
-    private static final String BASE_PATH = "/user-weather";
+    private static final String BASE_PATH = "/userWeathers";
 
     @Autowired
     private WebApplicationContext context;

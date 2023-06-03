@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.TransactionSystemException;
@@ -87,6 +88,15 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         logger.error("message: " + message + " detail: " + description);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAllExceptions(DataIntegrityViolationException e, WebRequest webRequest) {
+        String message = e.getCause().getMessage().split("\n ")[1].split("]")[0].substring(13);
+        String description = webRequest.getDescription(false);
+        var genericErrorMessage = new GenericErrorMessage(LocalDateTime.now(), message, description);
+        var response = RestResponse.error(genericErrorMessage);
+        logger.error("message: " + message + " detail: " + description);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     /**
      * Handles FeignException.
@@ -97,7 +107,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
      */
     @ExceptionHandler
     public final ResponseEntity<Object> handleAllExceptions(FeignException e, WebRequest webRequest) {
-        String message = "Requested city cannot found.";
+        String message = "Requested city cannot found. Please correct your input.";
         String description = e.getMessage() + " " +webRequest.getDescription(false);
         var genericErrorMessage = new GenericErrorMessage(LocalDateTime.now(), message, description);
         var response = RestResponse.error(genericErrorMessage);

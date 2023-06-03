@@ -23,13 +23,15 @@ export const doPostForLoginAndRegister = (url,object) =>{
       .catch(error =>{
         let errorMessage;
         let finalErrorMsg;
-        if(error.response.data.data == null){
-            errorMessage = error.response.data.detail + " Please correct your information with appropriate ones.";
+        
+        errorMessage = error.response?.data?.data?.message;
+        if(errorMessage){
+            finalErrorMsg = `Error: ${errorMessage}`;
         }
         else{
-            errorMessage = error.response.data.data.message;
+            finalErrorMsg = "An unexpected error occured. Please report this error to the website owners."
         }
-        finalErrorMsg = `Error: ${errorMessage}`;
+        
         document.getElementById('errMessage').innerHTML = finalErrorMsg;
     });
 }

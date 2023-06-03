@@ -28,7 +28,7 @@ public class User extends BaseEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSqGenerator")
     @SequenceGenerator(name = "userSqGenerator", sequenceName = "SQ_USER",allocationSize = 1)
     private Long id;
-    @Column(name = "USERNAME",length = 50 , nullable = false, unique = true)
+    @Column(name = "USERNAME",length = 25 , nullable = false, unique = true)
     private String username;
     @Column(name = "PASSWORD",length = 100 , nullable = false)
     private String password;

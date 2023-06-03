@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/weather")
+@RequestMapping("/weathers")
 @RequiredArgsConstructor
 @Validated
 @SecurityRequirement(name = "bearerAuth")

@@ -33,7 +33,7 @@ public class UserController {
      *
      * @return ResponseEntity containing a list of UserDto objects.
      */
-    @GetMapping("/")
+    @GetMapping
     @Operation(summary = "Get All Users")
     public ResponseEntity<RestResponse<List<UserDto>>> get() {
         return ResponseEntity.ok(RestResponse.of(userServiceContract.findAll()));
@@ -57,7 +57,7 @@ public class UserController {
      * @param request The UserDeleteRequest containing the username.
      * @return ResponseEntity with no content.
      */
-    @DeleteMapping("/")
+    @DeleteMapping
     @Operation(summary = "Delete User By Username")
     public ResponseEntity<RestResponse<Object>> delete(@RequestBody @Valid UserDeleteRequest request) {
         userServiceContract.deleteUserByUsername(request);
@@ -82,7 +82,7 @@ public class UserController {
      * @param request The UserChangeEmailRequest containing the new email and username.
      * @return ResponseEntity with no content.
      */
-    @PatchMapping("/")
+    @PatchMapping
     @Operation(summary = "Update Email By Username")
     public ResponseEntity<RestResponse<UserDto>> updateEmail(@Valid @RequestBody UserChangeEmailRequest request) {
         userServiceContract.changeEmail(request);
