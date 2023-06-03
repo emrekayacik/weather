@@ -8,13 +8,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequiredArgsConstructor
-@RequestMapping("weather")
-@SecurityRequirement(name = "bearerAuth")
 @CrossOrigin(origins="*")
+@RestController
+@RequestMapping("/weather")
+@RequiredArgsConstructor
+@Validated
+@SecurityRequirement(name = "bearerAuth")
 public class ClientController {
 
     private final ClientService clientService;

@@ -17,4 +17,5 @@ import lombok.Setter;
 public class WeatherCondition {
     private String main;
     private String description;
+    private String icon;
 }

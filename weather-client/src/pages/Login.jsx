@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import {mobile} from "../common/responsive"
 import { useState } from "react";
 import {doPostForLoginAndRegister} from '../common/auth';
+import ErrorMessage from '../components/ErrorMessage';
+import {Link} from 'react-router-dom';
 
 const Container = styled.div`
     width: 100vw;
@@ -51,9 +53,7 @@ const Button = styled.button`
     cursor: pointer;
     margin-bottom: 10px;
 `
-const ErrorMessage = styled.p`
-    color: red;
-`
+
 
 const Login = () => {
     const postUrl = 'http://localhost:8080/api/v1/auth/authenticate';
@@ -103,7 +103,9 @@ const Login = () => {
                 
                 placeholder="password" />
                 <Button onClick={handleLogin}>LOGIN</Button>
-                <ErrorMessage id='errMessage'></ErrorMessage>
+                
+                    <p>Don't you have an account? <Link to="/register" >Create an account.</Link></p>
+                <ErrorMessage></ErrorMessage>
             </Form>
         </Wrapper>
     </Container>

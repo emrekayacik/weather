@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import {mobile} from "../common/responsive";
 import { useState } from "react";
 import {doPostForLoginAndRegister} from '../common/auth';
+import ErrorMessage from '../components/ErrorMessage';
 
 const Container = styled.div`
     width: 100vw;
@@ -57,9 +58,7 @@ const Button = styled.button`
     cursor: pointer;
     margin-top: 15px;
 `
-const ErrorMessage = styled.p`
-    color: red;
-`
+
 
 const Register = () => {
     const postUrl = 'http://localhost:8080/api/v1/auth/register';

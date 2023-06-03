@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import {setAuthToken} from './setAuthToken';
 
 export const doPostForLoginAndRegister = (url,object) =>{
     axios.post(url, object)
@@ -16,6 +16,7 @@ export const doPostForLoginAndRegister = (url,object) =>{
         }
         if(data.token){
             localStorage.setItem('Authorization', data.token);
+            setAuthToken(data.token);
             window.location.href = '/';
         }
       })

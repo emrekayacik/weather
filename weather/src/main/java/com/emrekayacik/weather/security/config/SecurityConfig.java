@@ -45,10 +45,12 @@ public class SecurityConfig {
                                         "/swagger-ui/**",
                                         "/webjars/**",
                                         "/swagger-ui.html")
+
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )
+
                 .sessionManagement((sessionManagement) ->
                         sessionManagement
                                 .sessionConcurrency((sessionConcurrency) ->

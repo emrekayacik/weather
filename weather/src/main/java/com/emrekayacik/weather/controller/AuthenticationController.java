@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Controller class for handling authentication-related endpoints.
  */
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 @Validated
-@CrossOrigin(origins="*")
 public class AuthenticationController {
     private final AuthenticationService authService;
 
