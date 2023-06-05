@@ -114,6 +114,17 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+
+    /**
+     * Handles FeignException.
+     * Overrides the original handleMethodArgumentNotValid method
+     *
+     * @param headers the Headers
+     * @param status the HTTP Status
+     * @param request the web request
+     *
+     * @return a ResponseEntity with an error message
+     */
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         Map<String, String> errors = new HashMap<>();

@@ -1,3 +1,6 @@
+/**
+ * Custom CORS filter to handle Cross-Origin Resource Sharing (CORS) configuration.
+ */
 package com.emrekayacik.weather.security.config;
 
 import jakarta.servlet.*;
@@ -13,7 +16,15 @@ import java.io.IOException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class MyCORSFilter implements Filter {
 
-
+    /**
+     * Filters the incoming requests and adds the necessary CORS headers to the response.
+     *
+     * @param req   The {@link ServletRequest} object.
+     * @param res   The {@link ServletResponse} object.
+     * @param chain The {@link FilterChain} object.
+     * @throws IOException      If an I/O error occurs during the processing of the filter chain.
+     * @throws ServletException If an exception occurs during the processing of the filter chain.
+     */
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 
@@ -29,10 +40,18 @@ public class MyCORSFilter implements Filter {
         chain.doFilter(req, res);
     }
 
+    /**
+     * Initializes the filter. This method is empty as no initialization is required for this filter.
+     *
+     * @param filterConfig The {@link FilterConfig} object.
+     */
     @Override
     public void init(FilterConfig filterConfig) {
     }
 
+    /**
+     * Cleans up any resources used by the filter. This method is empty as no cleanup is required for this filter.
+     */
     @Override
     public void destroy() {
     }

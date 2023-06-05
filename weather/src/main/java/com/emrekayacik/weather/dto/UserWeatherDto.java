@@ -15,7 +15,7 @@ import lombok.Setter;
 public class UserWeatherDto extends BaseDto {
     @NotNull
     private Long id;
-    @NotBlank
+    @NotBlank(message = "City name cannot be blank.")
     private String cityName;
 
     private UserDto user;

@@ -1,3 +1,6 @@
+/**
+ * Configuration class for handling Cross-Origin Resource Sharing (CORS).
+ */
 package com.emrekayacik.weather.security.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -9,6 +12,12 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 public class CorsConfig {
+
+    /**
+     * Creates and configures a {@link FilterRegistrationBean} for the CORS filter.
+     *
+     * @return The configured {@link FilterRegistrationBean} for the CORS filter.
+     */
     @Bean
     public FilterRegistrationBean platformCorsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

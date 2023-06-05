@@ -12,8 +12,6 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -160,7 +158,7 @@ class UserEntityServiceTest {
         userEntityService.updateEmailByUsername(username, newEmail);
 
         // Assert
-        verify(userRepositoryMock, times(1)).updateEmailByUsername(username, newEmail, LocalDateTime.now());
+        verify(userRepositoryMock, times(1)).updateEmailByUsername(eq(username), eq(newEmail), any());
     }
 
     @Test
