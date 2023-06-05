@@ -27,7 +27,7 @@ public class ClientService {
     }
 
     private static void latitudeRangeCheck(double val, int x, String x1) {
-        if (val > x || val < -x) {
+        if (val > x || val < -x ) {
             throw new OpenWeatherClientException(() -> x1);
         }
     }

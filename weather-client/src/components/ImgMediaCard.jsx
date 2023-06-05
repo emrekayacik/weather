@@ -9,20 +9,35 @@ import CompressOutlined from '@mui/icons-material/CompressOutlined';
 import AirOutlinedIcon from '@mui/icons-material/AirOutlined';
 
 export default function ImgMediaCard(props) {
-  let item = props.item;
-  let weatherCondition = item.weather[0];
-  let main = props.item.main;
+  const item = props.item;
+  const weatherCondition = item.weather[0];
+  const main = props.item.main;
 
-  let imageSrc = `https://openweathermap.org/img/wn/${weatherCondition.icon}@2x.png`;
+  const imageSrc = `https://openweathermap.org/img/wn/${weatherCondition.icon}@2x.png`;
 
-  let tempColor = main.temp > 15 ? "red" : "darkblue";
-  let date_text = props.item.dt_txt;
+  const tempColor = main.temp > 15 ? "red" : "darkblue";
+  const date_text = props.item.dt_txt;
 
-  let date = date_text.split(' ')[0];
-  let hour = date_text.split(' ')[1];
+  const dateOriginal = new Date(date_text);
+  const date = dateOriginal.toLocaleDateString('EN-gb', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit",minute:'2-digit'});
   
-  let windSpeed = props.item.wind.speed;
+  const splittedDate = date.split(',');
 
+  const day = splittedDate[0];
+  const monthDayYear = splittedDate[1];
+  const hour = splittedDate[2];
+
+  let hourColor;
+  if(dateOriginal.getHours() <= 18 && dateOriginal.getHours() >= 6){
+    hourColor = "DarkOrange"
+  }
+  else{
+    hourColor = "DarkBlue"
+  }
+
+  const windSpeed = props.item.wind.speed;
+
+  
   return (
     <React.StrictMode>
     <CCol md={3}>
@@ -33,7 +48,14 @@ export default function ImgMediaCard(props) {
     </CCol>
     <CCol md={8}>
       <CCardBody>
-        <CCardTitle><b>{date}</b> <QueryBuilderIcon ></QueryBuilderIcon>{hour}</CCardTitle>
+        <CCardTitle>
+        <b style={{color:"DarkCyan"}}>{day}</b>
+        <br></br>
+        <QueryBuilderIcon></QueryBuilderIcon> <b style={{color:hourColor}}>{hour}</b>
+        <br></br>
+        <span >{monthDayYear}</span>
+        </CCardTitle>
+        <br></br>
         <CCardText>
          <b><DeviceThermostatIcon></DeviceThermostatIcon>Temp: </b><b style={{color:tempColor}}>{main.temp}°C</b> 
         </CCardText>

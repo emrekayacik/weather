@@ -38,76 +38,93 @@ public class UserWeatherControllerTest extends BaseTest {
 
     @Test
     void should_get_all_and_return_success() throws Exception {
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get(BASE_PATH )
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
     @Test
     void should_get_by_id_and_return_success() throws Exception {
+        // Arrange
         long id = 1003L;
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get(BASE_PATH + "/" + id )
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
     @Test
     void should_delete_and_return_success() throws Exception {
+        // Arrange
         long id = 1001L;
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.delete(BASE_PATH + "/" + id)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
 
     @Test
     void should_get_by_username_and_return_success() throws Exception {
+        // Arrange
         String username = "emrekayacik";
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get(BASE_PATH + "/user?username=" +username)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
     @Test
     void should_get_by_cityName_and_return_success() throws Exception {
+        // Arrange
         String cityName = "paris";
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get(BASE_PATH + "/city?cityName=" +cityName)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
     @Test
     void should_save_userWeather_and_return_success() throws Exception {
+
+        // Arrange
         String body = """
                 {
                   "username": "emrekayacik",
                   "city": "beijing"
                 }""";
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.post(BASE_PATH)
                                 .content(body)
@@ -116,8 +133,8 @@ public class UserWeatherControllerTest extends BaseTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
 

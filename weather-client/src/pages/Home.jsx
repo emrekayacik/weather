@@ -12,6 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import NavbarComp from '../components/NavbarComp';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import {mobile} from '../common/responsive'
+import { MagnifyingGlass } from  'react-loader-spinner'
+
 
 const Title = styled.h1`
     font-size: 24px;
@@ -66,6 +68,7 @@ const Home = (props) => {
   const [isHovering, setIsHovering] = useState(false);
   const [userFavorites, setUserFavorites] = useState({});
   const [favList, setFavList] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovering(true);
@@ -132,7 +135,8 @@ const Home = (props) => {
 
   const handleGet = (e) => {
     e.preventDefault();
-
+    
+    
     let lat = document.getElementById("lat").value;
     let lon = document.getElementById("lon").value;
     let city = document.getElementById("cityName").value;
@@ -140,15 +144,26 @@ const Home = (props) => {
     let typeToPost = type;
     let BASE_URL = 'http://localhost:8080/api/v1/weathers';
     if(typeToPost === 1){
+      if(city === undefined || city === null || city === ""){
+        document.getElementById("errMessage").innerHTML = "City name cannot be blank.";
+        return;
+      }
       doGet(`${BASE_URL}/forecasts/city?city=${city}`);
     }
     else if(typeToPost === 2){
+      if(lat === undefined || lat === null || lat === "" ||lon === undefined || lon === null || lon === "" ){
+        document.getElementById("errMessage").innerHTML = "Latitude and Longitude cannot be blank.";
+        return;
+      }
       doGet(`${BASE_URL}/forecasts/coordinates?lat=${lat}&lon=${lon}`);
     }
   }
 
   const doGet = (url) =>{
+    setIsLoading(true);
+
     document.getElementById("errMessage").innerHTML = "";
+    
     axios.get(url
      )
       .then( res =>
@@ -173,15 +188,17 @@ const Home = (props) => {
           handleRenderingUserFavoritedCity(false);
         }
         document.getElementById("favButton").style.display = "inline-block";
+        setIsLoading(false);
+
       })
       .catch(error =>{
         console.log(error);
         document.getElementById("errMessage").innerHTML = error.response?.data?.data?.message;
 
-        const isUserFavoritedCurrentCity = userFavorites.map(a=>a.cityName).includes(data.city?.name);
+        const isUserFavoritedCurrentCity = userFavorites?.map(a=>a.cityName)?.includes(data.city?.name);
 
         handleRenderingUserFavoritedCity(isUserFavoritedCurrentCity);
-        
+        setIsLoading(false);
     });
   }
 
@@ -192,12 +209,13 @@ const Home = (props) => {
   
   const handleFavorite = (e) =>{
     e.preventDefault();
-
+    
     const isUserFavoritedCurrentCity = userFavorites.map(a=>a.cityName).includes(city);
     if(isUserFavoritedCurrentCity){
       handleUnFavorite(e);
       return;
     }
+
 
     document.getElementById("errMessage").innerHTML = "";
     let url = 'http://localhost:8080/api/v1/userWeathers';
@@ -228,7 +246,6 @@ const Home = (props) => {
           cityName: data.cityName
         });
         setUserFavorites(userFavCopy)
-        
       })
       .catch(error =>{
         if(error.response?.data?.data?.message.includes("already exists")){
@@ -237,6 +254,7 @@ const Home = (props) => {
         else{
           document.getElementById("errMessage").innerHTML = error.response?.data?.data?.message;
         }
+
         
     });
   }
@@ -257,8 +275,6 @@ const Home = (props) => {
       .then(data=> {
         setUserFavorites(userFavorites.filter(a=>a.id !== id))
         handleRenderingUserFavoritedCity(false);
-       
-        
       })
       .catch(error =>{
         console.log(error);
@@ -284,7 +300,7 @@ const Home = (props) => {
         <CContainer style={{marginTop: 25}}>
 
                 <Title>Weather App Home</Title>
-              <Form>
+              <Form className='center'>
               <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="slcWeather-label">Select</InputLabel>
           <Select
@@ -316,6 +332,7 @@ const Home = (props) => {
                   name="cityName"
                   placeholder="city" />
                 <SelectComp onClick={arrangeFavList} style={{display:"none"}} onChange={handleSelectFavoriteChange} id="favList">
+                    <option disabled selected></option>
                     {
                       favList
                     }
@@ -324,11 +341,31 @@ const Home = (props) => {
               </Form>
         </FormControl>
                   <Button id='btnGet' onClick={handleGet}>GET</Button>
+                  <div style={{width:"100%"}}>
+
+                    <p style={{textAlign: "center"}}>
+                    <MagnifyingGlass
+                    id="loadingSpinner"
+                    visible={isLoading}
+                    height="80"
+                    width="80"
+                    ariaLabel="MagnifyingGlass-loading"
+                    wrapperStyle={{center}}
+                    wrapperClass="MagnifyingGlass-wrapper"
+                    glassColor = '#c0efff'
+                    color = '#e15b64'
+                  />
+                    </p>
+                  </div>
+                 
+                
                   <ErrorMessage />
               </Form>
               <div style={center}>
                 <h1 style={{fontFamily: "Times New Roman"}}>{city}</h1><span>{country} </span>
-                <p><FavoriteBorderOutlinedIcon
+                <p>
+                
+                  <FavoriteBorderOutlinedIcon
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onClick={handleFavorite}

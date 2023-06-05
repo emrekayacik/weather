@@ -8,6 +8,7 @@ import com.emrekayacik.weather.service.userWeather.UserWeatherServiceContract;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -37,12 +38,12 @@ public class UserWeatherController {
     }
     @GetMapping("/user")
     @Operation(summary = "Get user saved cities")
-    public ResponseEntity<RestResponse<List<UserWeatherDto>>> findByUsername(@RequestParam String username) {
+    public ResponseEntity<RestResponse<List<UserWeatherDto>>> findByUsername(@Valid @NotBlank(message = "Username cannot be blank.")  @RequestParam String username) {
         return ResponseEntity.ok(RestResponse.of(service.findByUsername(username)));
     }
     @GetMapping("/city")
     @Operation(summary = "Get by city name")
-    public ResponseEntity<RestResponse<List<UserWeatherDto>>> findByCityName(@RequestParam String cityName) {
+    public ResponseEntity<RestResponse<List<UserWeatherDto>>> findByCityName(@Valid @NotBlank(message = "City name cannot be blank.")@RequestParam String cityName) {
         return ResponseEntity.ok(RestResponse.of(service.findByCityName(cityName)));
     }
     @DeleteMapping("/{id}")

@@ -40,7 +40,7 @@ public class AuthenticationController {
      * @return ResponseEntity containing the authentication response.
      */
     @PostMapping("/authenticate")
-    public ResponseEntity<RestResponse<AuthenticationResponse>> authenticate(@RequestBody AuthenticationRequest request) {
+    public ResponseEntity<RestResponse<AuthenticationResponse>> authenticate(@Valid@RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(RestResponse.of(authService.authenticate(request)));
     }
 }

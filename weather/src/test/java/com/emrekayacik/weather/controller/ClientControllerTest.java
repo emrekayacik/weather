@@ -39,59 +39,72 @@ public class ClientControllerTest extends BaseTest {
 
     @Test
     void should_get_city_forecasts_by_cityName_and_return_success() throws Exception {
+        // Assert
         String city = "istanbul";
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get(BASE_PATH + "/forecasts/city?city="+ city )
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Arrange
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
 
     @Test
     void should_get_city_forecasts_by_lat_lon_and_return_success() throws Exception {
+        // Assert
         double lat = 34.5;
         double lon = 26.5;
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get(BASE_PATH + "/forecasts/coordinates?lat="+ lat + "&lon=" +lon )
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
 
     @Test
     void should_get_city_current_weather_by_cityName_and_return_success() throws Exception {
+        // Arrange
         String city = "istanbul";
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get(BASE_PATH + "/current/city?city="+ city )
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
 
     @Test
     void should_get_city_current_weather_by_lat_lon_and_return_success() throws Exception {
+        // Arrange
         double lat = 34.5;
         double lon = 26.5;
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get(BASE_PATH + "/current/coordinates?lat="+ lat + "&lon=" +lon )
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
-        boolean success = isSuccess(mvcResult);
 
+        // Assert
+        boolean success = isSuccess(mvcResult);
         assertTrue(success);
     }
 

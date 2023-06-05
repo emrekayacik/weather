@@ -42,6 +42,7 @@ public class AuthenticationControllerTest extends BaseTest {
 
     @Test
     void should_register_and_return_success() throws Exception {
+        // Arrange
         String body = """
                 {
                   "username": "mockuser",
@@ -52,6 +53,7 @@ public class AuthenticationControllerTest extends BaseTest {
                   "phoneNumber": "+461422145574"
                 }""";
 
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.post(BASE_PATH + "/register" )
                                 .content(body)
@@ -60,12 +62,13 @@ public class AuthenticationControllerTest extends BaseTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
     @Test
     void should_register_and_return_jwt() throws Exception {
+        // Arrange
         String body = """
                 {
                   "username": "mockuserjwt",
@@ -76,6 +79,8 @@ public class AuthenticationControllerTest extends BaseTest {
                   "phoneNumber": "+146422145574"
                 }""";
 
+        // Act
+
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.post(BASE_PATH + "/register" )
                                 .content(body)
@@ -84,17 +89,20 @@ public class AuthenticationControllerTest extends BaseTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         String jwt = getJwt(mvcResult);
-
         assertJwtValid(jwt);
     }
     @Test
     void should_authenticate_and_return_success() throws Exception {
+        // Arrange
         String body = """
                 {
                   "username": "mockuserjwt",
                   "password": "mockpassword"
                 }""";
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.post(BASE_PATH + "/authenticate" )
                                 .content(body)
@@ -103,18 +111,21 @@ public class AuthenticationControllerTest extends BaseTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
 
     @Test
     void should_authenticate_and_return_jwt() throws Exception {
+        // Arrange
         String body = """
                 {
                   "username": "mockuser",
                   "password": "mockpassword"
                 }""";
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.post(BASE_PATH + "/authenticate" )
                                 .content(body)
@@ -123,8 +134,8 @@ public class AuthenticationControllerTest extends BaseTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         String jwt = getJwt(mvcResult);
-
         assertJwtValid(jwt);
     }
 

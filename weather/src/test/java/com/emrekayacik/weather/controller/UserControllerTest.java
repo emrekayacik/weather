@@ -38,38 +38,46 @@ public class UserControllerTest extends BaseTest {
 
     @Test
     void should_get_all_and_return_success() throws Exception {
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get(BASE_PATH)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
 
     @Test
     void should_get_by_id_and_return_success() throws Exception {
+
+        // Arrange
         long id = 1003L;
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get(BASE_PATH + "/" + id )
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
 
     @Test
     void should_delete_and_return_success() throws Exception {
+        // Arrange
         String body = """
                 {
                   "username": "dummyusername"
                 }
                 """;
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.delete(BASE_PATH )
                                 .content(body)
@@ -78,13 +86,15 @@ public class UserControllerTest extends BaseTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
 
     @Test
     void should_update_user_and_return_success() throws Exception {
+
+        // Arrange
         long id = 1001L;
         String body = """
                 {
@@ -95,6 +105,8 @@ public class UserControllerTest extends BaseTest {
                   "email": "emrekayacik2634@gmail.com",
                   "phoneNumber": "+905533095569"
                 }""";
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.put(BASE_PATH + "/" + id + "/update")
                                 .content(body)
@@ -103,17 +115,21 @@ public class UserControllerTest extends BaseTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
     @Test
     void should_update_email_by_username_and_return_success() throws Exception {
+
+        // Arrange
         String body = """
                 {
                   "username": "emrekayacik",
                   "email": "dummydummy@gmail.com"
                 }""";
+
+        // Act
         MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.patch(BASE_PATH )
                                 .content(body)
@@ -122,8 +138,8 @@ public class UserControllerTest extends BaseTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        // Assert
         boolean success = isSuccess(mvcResult);
-
         assertTrue(success);
     }
 
