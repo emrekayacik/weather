@@ -102,11 +102,13 @@ mvn clean install
 java -jar target/weather-0.0.1-SNAPSHOT.jar
 ```
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/a09188f7-f1f5-4311-b98b-61f4b29106f7)
+![image](https://github.com/emrekayacik/weather/assets/73127270/2c1f378f-ed67-4982-806f-2ed3c00049fc)
+
 
 The server is up on the 8080 port
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/37612931-f78a-4864-8e73-d24adb864f17)
+![image](https://github.com/emrekayacik/weather/assets/73127270/0287e73d-0eef-4326-bdf3-df15f894b4f9)
+
 
 Go to http://localhost:8080/api/v1/swagger-ui/index.html#/
 
@@ -138,7 +140,7 @@ npm install
 > This process can take a while, maybe you can fill a cup of coffee :) Wait for the installation and do not proceed the next step until it's finished
 
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/ae15566d-7204-4b59-bd23-b8f8e725c30d)
+![image](https://github.com/emrekayacik/weather/assets/73127270/da3ae65e-7570-4198-9837-79c4df046f27)
 
 
 #### Run the command to start the React Application
@@ -147,7 +149,8 @@ npm install
 npm start
 ```
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/023dbf2d-0049-421b-a231-c8a48a564331)
+![image](https://github.com/emrekayacik/weather/assets/73127270/5b029491-58d2-4f44-9c97-45f0dc7fbc0f)
+
 
 **Congratulations, your application is up on the port 3000, enjoy the project**
 
@@ -155,7 +158,7 @@ npm start
 
 ## Swagger UI endpoints
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/82408a96-0753-4d69-9b79-0a23a9e069a1)
+![image](https://github.com/emrekayacik/weather/assets/73127270/4c448b1f-5a03-4b66-886f-a8e20c6939a8)
 
 <hr>
 
@@ -163,54 +166,55 @@ npm start
 
 #### Sign In
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/24dcad9d-d798-4556-9283-461a3d5dda04)
+![image](https://github.com/emrekayacik/weather/assets/73127270/4d479f12-145d-4e26-8b18-f8860d1a894d)
+
 
 #### Register
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/72d30964-f978-4ce5-81c5-6e33ffdf5b42)
+![image](https://github.com/emrekayacik/weather/assets/73127270/64337c0a-55cb-45d9-8764-a66b5f38aca7)
 
 
 #### Home page, After logging in or creating an account
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/52426f01-7bf2-4079-af5d-9fa3c9df30f3)
+![image](https://github.com/emrekayacik/weather/assets/73127270/5e7371c2-528f-41e0-a186-3392da7e479a)
 
 
 ### Choices to fetch weather data
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/288e3596-0ba4-4658-bd2b-74a454227d3b)
+![image](https://github.com/emrekayacik/weather/assets/73127270/fef40a99-7648-4d5e-ad97-acb918939fe7)
 
 ### By city name
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/2511b388-de19-42bc-90a3-f58a305ac8f4)
+![image](https://github.com/emrekayacik/weather/assets/73127270/870f838d-9430-47a4-ba1a-158723cd3d30)
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/bb4c02e9-d09e-42bc-b0e6-9dac12b63805)
+![image](https://github.com/emrekayacik/weather/assets/73127270/63db28c2-ab56-4b0a-ac7f-e8df07451470)
 
 ### Add to favorite
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/83ceb1f6-4087-404a-af86-d82464008f3f)
+![image](https://github.com/emrekayacik/weather/assets/73127270/74841ec9-9acd-485c-b725-30dfae6fbf91)
 
 
 ### By latitude and longtitude
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/b3a1e8f7-3955-4ee9-9ebe-d4d1a56ac1ef)
+![image](https://github.com/emrekayacik/weather/assets/73127270/12132f83-89ab-4fad-a271-0da7cfd62106)
 
 
 ### By user's favorite
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/4b955712-8501-4e16-b55b-a08e9ab94b6b)
+![image](https://github.com/emrekayacik/weather/assets/73127270/f454ac29-6607-47fd-bbf8-f52d2e60eacf)
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/71e5e8fa-dc6d-46c6-a87f-f3f7a9a7574b)
+![image](https://github.com/emrekayacik/weather/assets/73127270/eba0fbf0-fcfc-4749-9ba2-55b0a4d9c5b4)
 
 
 ### Remove from favorites
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/7ff6ba72-0da7-45c7-a672-9435b7c37875)
+![image](https://github.com/emrekayacik/weather/assets/73127270/65af7997-d4c2-4c73-8ab4-46b96b5a08b9)
 
 ### Favorite List is updated
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/305e38c7-1c4c-4aeb-a667-e08e0673b6dd)
+![image](https://github.com/emrekayacik/weather/assets/73127270/02afcbf8-2ccf-42a0-a34a-19bccfe321b0)
 
 ### Logout(right-top corner of the application)
 
-![image](https://github.com/emrekayacik/weather/assets/73127270/04b19f4c-810f-469e-93ba-11cfe9ca0054)
+![image](https://github.com/emrekayacik/weather/assets/73127270/49cbd4e3-0c4a-454d-9521-791a0b86f726)
 
