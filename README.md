@@ -17,6 +17,7 @@ Please be sure your Kafka Broker is up and running and configured correctly. If 
 
 "weather\src\main\java\com\emrekayacik\weather\config\WebMvcConfig.java"
 
+<hr> <hr>
 
 Spring Boot project is located in the **weather** folder, logging microservice with kafka is located in the **weather-log-service** folder and the React project is located in the **weather-client** folder
 
