@@ -17,13 +17,20 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.3.Final/mapstruct-processor-1.5.3.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.3.Final/mapstruct-1.5.3.Final.jar" />
         </processorPath>
-        <module name="weather" />
+        <module name="weather (1)" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="weather" target="17" />
+      <module name="weather-log-service" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="weather" options="-parameters" />
+      <module name="weather (1)" options="-parameters" />
+      <module name="weather (2)" options="-parameters" />
+      <module name="weather-log-service" options="-parameters" />
     </option>
   </component>
 </project>

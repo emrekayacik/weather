@@ -171,7 +171,12 @@
 		</dependency>
 		<!-- Log4j2 -->
 
-
+		<!-- Kafka -->
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+		<!-- Kafka -->
 	</dependencies>
 
 	<build>
