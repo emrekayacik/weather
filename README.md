@@ -70,6 +70,18 @@ spring.datasource.password={password}
   
 spring.datasource.driver-class-name=org.postgresql.Driver
 ```
+
+### Properties for Kafka in "weather-log-service"
+  
+```
+server.port=8081
+
+weather.kafka.logger.address=localhost:9092
+
+weather.kafka.logger.topic=logger-topic
+
+weather.kafka.logger.group-id=log-group
+```
 > You can find the original application.properties file in the project under **src/main/resources**
 
 
@@ -217,4 +229,9 @@ npm start
 ### Logout(right-top corner of the application)
 
 ![image](https://github.com/emrekayacik/weather/assets/73127270/49cbd4e3-0c4a-454d-9521-791a0b86f726)
+
+### Request Logs from Kafka Listener
+
+![image](https://github.com/emrekayacik/weather/assets/73127270/d5917e89-9e72-4dbf-938c-9cbaf044fc47)
+
 
