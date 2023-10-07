@@ -8,6 +8,10 @@ The application provides users with the ability to register and log in. Upon log
 Additionally, users can save cities as favorites and conveniently access them at a later time.
 
 Application is built on Spring Boot, Kafka and React. If your Kafka Broker is not running on your local machine or docker, you may encounter errors.
+Please be sure your Kafka Broker is up and running and configured correctly. If you run app without Kafka, delete these files
+"weather\src\main\java\com\emrekayacik\weather\kafka\*"
+"weather\src\main\java\com\emrekayacik\weather\interceptors\KafkaLoggingInterceptor.java"
+"weather\src\main\java\com\emrekayacik\weather\config\WebMvcConfig.java"
 Spring Boot project is located in the **weather** folder, logging microservice with kafka is located in the **weather-log-service** folder and the React project is located in the **weather-client** folder
 
 <hr> <hr>
